@@ -1,0 +1,56 @@
+Experiment 1.1 Contains Duplicate(Leetcode problem 217)
+Aim: Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+Algorithm:
+1. start
+2. Create an empty Hash Set called seen.
+3. Traverse each element nums[i] in the array.
+4. Check whether nums[i] already exists in seen.
+5. If yes, return true.
+Otherwise, insert nums[i] into seen.
+6. If the loop finishes without finding a duplicate, return false.
+7. End
+
+CODE: 
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+      sort(nums.begin(),nums.end());
+      for(int i=1;i<nums.size();i++){
+        if(nums[i]==nums[i-1]){
+            return true;
+        }
+      }  
+      return false;
+    }
+};
+
+Experiment1.2 Contains Duplicate 2(Leetcode Problem 219)
+Aim: Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+Algorithm:
+ 1: Start.
+ 2: Take the integer array nums and integer k as input.
+ 3: Create an empty unordered map mp to store each array element and its latest index.
+ 4: Traverse the array using index i from 0 to nums.size() - 1.
+ 5: Check if nums[i] is already present in mp.
+ 6: If it is present, calculate the difference between the current index i and its previously stored index mp[nums[i]].
+ 7: If abs(i - mp[nums[i]]) <= k, return true.
+ 8: Store or update the current index of the element using mp[nums[i]] = i.
+ 9: Repeat Steps 5–8 for all elements of the array.
+ 10: If no such duplicate elements are found, return false.
+ 11: Stop.
+
+ CODE: 
+ class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int,int>mp;
+        for(int i=0;i<nums.size();i++){
+            if(mp.find(nums[i])!=mp.end() && (abs(i-mp[nums[i]])<=k)){
+                return true;
+        }
+        mp[nums[i]]=i;
+        }            
+        return false;
+    } 
+};
