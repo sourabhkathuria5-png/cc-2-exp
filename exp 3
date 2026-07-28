@@ -1,0 +1,52 @@
+leetcode problem 232
+AIM:- Implement a first-in-first-out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
+
+ALGORITHM:-
+1- Initialize:
+A) Two standard stacks, S1 and S2.
+2- For push(x) operation:
+A) Repeat while S1 is not empty: push the top element of S1 onto S2 and pop it from S1.
+B) Push the new element x onto the now-empty S1.
+C) Repeat while S2 is not empty: push the top element of S2 back onto S1 and pop it from S2. (This ensures the oldest element is always at the top of S1).
+3- For pop() operation:
+A) Retrieve the top element of S1 and store it in val.
+B) Pop the top element from S1.
+C) Return val.
+4- For peek() operation:
+A) Return the top element of S1 without removing it.
+5- For empty() operation:
+A) Return true if S1 is empty, otherwise return false.
+
+
+CODE:-
+class MyQueue {
+public:
+    MyQueue() {
+        
+    }
+    stack<int>S1,S2;
+    void push(int x) {
+        while(!S1.empty()){
+            S2.push(S1.top());
+            S1.pop();
+        }
+        S1.push(x);
+        while(!S2.empty()){
+            S1.push(S2.top());
+            S2.pop();
+        }    
+    }
+    int pop() {
+        int val = S1.top();
+        S1.pop();
+        return val;
+    }
+    
+    int peek() {
+        return S1.top();
+    }
+    
+    bool empty() {
+        return S1.empty();
+    }
+};
