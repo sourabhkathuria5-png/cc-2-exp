@@ -1,0 +1,44 @@
+EXPERIMENT-2 Search Insert Position (LEETCODE PROBLEM 2)
+
+1) AIM:-Given a sorted array of distinct integers and a target value, return the index if the target is found. 
+If not, return the index where it would be if it were inserted in order.
+
+2) ALGORITHM:-
+1- Initialize:
+      A) low = 0
+      B) high = nums.size() - 1
+2- Repeat while low <= high:
+      A) Calculate the middle index:
+         mid = low + (high - low) / 2
+      B) If nums[mid] == target, return mid.
+      C) If nums[mid] >= target, search in the left half by setting:
+         high = mid - 1.
+      D) Otherwise, search in the right half by setting:
+        low = mid + 1.
+3- When the loop ends, the target is not present in the array.
+4- Return low, because low represents the correct position where the target should be inserted while keeping the array sorted.
+
+3) CODE:-
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] == target) {
+                return mid;
+            }
+            else if (nums[mid] >= target) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+
+        return low;
+    }
+};
